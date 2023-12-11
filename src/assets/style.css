@@ -35,6 +35,9 @@
   --color-2: #c20e0e;
   --glow-color: #c20e0e;
 }
+.color-1 {
+  color: var(--color-2) !important;
+}
 
 html,
 body {
@@ -1498,11 +1501,11 @@ option {
 }
 
 .footer__logo {
-  margin-bottom: 20px;
 }
 
 .footer__logo a {
   display: inline-block;
+  margin-top: -80px;
 }
 
 .footer__social {

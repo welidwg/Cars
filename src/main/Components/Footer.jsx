@@ -1,7 +1,9 @@
+import Logo from "../../assets/4.png";
+
 export default function Footer(params) {
   return (
     <>
-      <footer class="footer set-bg" data-setbg="img/footer-bg.jpg">
+      <footer class="footer set-bg">
         <div class="container">
           <div class="footer__contact">
             <div class="row">
@@ -29,25 +31,25 @@ export default function Footer(params) {
               <div class="footer__about">
                 <div class="footer__logo">
                   <a href="#">
-                    <img src="img/footer-logo.png" alt="" />
+                    <img src={Logo} className="w-75" alt="logo" />
                   </a>
                 </div>
-                <p>
+                <p className="text-white fw-bold">
                   Any questions? Let us know in store at 625 Gloria Union,
                   California, United Stated or call us on (+1) 96 123 8888
                 </p>
                 <div class="footer__social">
                   <a href="#" class="facebook">
-                    <i class="fa fa-facebook"></i>
+                    <i class="fab fa-facebook"></i>
                   </a>
                   <a href="#" class="twitter">
-                    <i class="fa fa-twitter"></i>
+                    <i class="fab fa-twitter"></i>
                   </a>
                   <a href="#" class="google">
-                    <i class="fa fa-google"></i>
+                    <i class="fab fa-google"></i>
                   </a>
                   <a href="#" class="skype">
-                    <i class="fa fa-skype"></i>
+                    <i class="fab fa-skype"></i>
                   </a>
                 </div>
               </div>
@@ -120,7 +122,7 @@ export default function Footer(params) {
                 <ul>
                   <li>
                     <a href="#">
-                      <i class="fa fa-angle-right"></i>
+                      <i class="fas fa-angle-right"></i>
                       Abarth
                     </a>
                   </li>
@@ -146,43 +148,31 @@ export default function Footer(params) {
                 <ul>
                   <li>
                     <a href="#">
-                      <i class="fa fa-angle-right"></i>
+                      <i class="fas fa-angle-right"></i>
                       BMW
                     </a>
                   </li>
                   <li>
                     <a href="#">
-                      <i class="fa fa-angle-right"></i>
+                      <i class="fas fa-angle-right"></i>
                       Chevrolet
                     </a>
                   </li>
                   <li>
                     <a href="#">
-                      <i class="fa fa-angle-right"></i>
+                      <i class="fas fa-angle-right"></i>
                       Ferrari
                     </a>
                   </li>
                   <li>
                     <a href="#">
-                      <i class="fa fa-angle-right"></i>
+                      <i class="fas fa-angle-right"></i>
                       Honda
                     </a>
                   </li>
                 </ul>
               </div>
             </div>
-          </div>
-          <div class="footer__copyright__text">
-            <p>
-              Copyright &copy;
-              <script>document.write(new Date().getFullYear());</script>
-              All rights reserved | This template is made with
-              <i class="fa fa-heart" aria-hidden="true"></i>
-              by
-              <a href="https://colorlib.com" target="_blank">
-                Colorlib
-              </a>
-            </p>
           </div>
         </div>
       </footer>
