@@ -1,13 +1,11 @@
-import Navbar from "./Navbar";
-import SideBar from "./SideBar";
-import "../../assets/style.css";
+import Footer from "../Components/Footer";
+import Navbar from "../Components/Navbar";
+import SideBar from "../Components/SideBar";
 import $ from "jquery";
 import { useEffect } from "react";
 
 export default function Wrapper(props) {
-  useEffect(() => {
-
-  }, []);
+  useEffect(() => {}, []);
   return (
     <>
       <div id="preloder">
@@ -17,6 +15,7 @@ export default function Wrapper(props) {
       <SideBar />
       <Navbar />
       <section>{props.children}</section>
+      <Footer />
       <div class="search-model">
         <div class="h-100 d-flex align-items-center justify-content-center">
           <div class="search-close-switch">+</div>

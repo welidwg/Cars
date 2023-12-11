@@ -1,9 +1,11 @@
-import Header from "../Layouts/Header";
+import CarsMenu from "../Components/CarsMenu";
+import Header from "../Components/Header";
 import Wrapper from "../Layouts/Wrapper";
 export default function Home(props) {
   return (
     <Wrapper>
       <Header />
+      <CarsMenu />
     </Wrapper>
   );
 }

@@ -101,6 +101,7 @@ textarea:focus {
 
 a {
   color: white !important;
+  text-decoration: none !important;
 }
 a:hover,
 a:focus {
@@ -1112,6 +1113,7 @@ option {
 
 .car__item__text {
   border: 1px solid #ebebeb;
+  background-color: white;
 }
 
 .car__item__text__inner {
@@ -1121,10 +1123,11 @@ option {
 .car__item__text__inner .label-date {
   display: inline-block;
   font-size: 13px;
-  color: #323232;
+  color: white;
   font-weight: 700;
   padding: 2px 15px 1px;
   border: 1px solid #ebebeb;
+  background-color: var(--color-2);
   border-radius: 2px;
 }
 
@@ -1134,14 +1137,14 @@ option {
 }
 
 .car__item__text__inner h5 a {
-  color: #353535;
+  color: black !important;
   font-weight: 700;
 }
 
 .car__item__text__inner ul li {
   list-style: none;
   font-size: 15px;
-  color: #8d8d8d;
+  color: black;
   font-weight: 700;
   position: relative;
   display: inline-block;
@@ -1154,12 +1157,12 @@ option {
   top: 3px;
   height: 15px;
   width: 2px;
-  background: #8d8d8d;
+  background: var(--color-2);
   content: "";
 }
 
 .car__item__text__inner ul li span {
-  color: #323232;
+  color: black;
 }
 
 .car__item__text__inner ul li:last-child {
@@ -1172,19 +1175,17 @@ option {
 
 .car__item__price {
   position: relative;
+  display: flex;
 }
 
-.car__item__price .car-option {
+.car-option {
   font-size: 15px;
   color: #ffffff;
   font-weight: 700;
-  background: #4971ff;
+  /* background: limegreen; */
   display: inline-block;
   padding: 12px 22px 10px;
   border-radius: 2px 0 0 2px;
-  position: absolute;
-  left: 0;
-  top: 0;
 }
 
 .car__item__price .car-option.sale {
@@ -1216,9 +1217,9 @@ option {
   height: 50px;
   width: 50px;
   font-size: 18px;
-  color: #727171;
+  color: black !important;
   font-weight: 700;
-  border: 1px solid #ebebeb;
+  border: 1px solid #323232;
   border-radius: 2px;
   line-height: 50px;
   text-align: center;
@@ -1231,7 +1232,7 @@ option {
 .pagination__option a:hover,
 .pagination__option a.active {
   border-color: var(--color-2);
-  color: #353535;
+  color: var(--color-2) !important;
 }
 
 .pagination__option a:last-child {
