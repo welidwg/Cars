@@ -1,21 +1,11 @@
 import { useEffect } from "react";
-// import Hero from "../../assets/img/hero-bg.jpg";
-import Video from "../../assets/video.mp4";
+
 
 export default function Header(props) {
-  useEffect(() => {
-    let video = document.getElementById("video-background");
-    video.playbackRate = 0.8;
-    setInterval(() => {
-      if (video.currentTime > 6.6) {
-        video.pause();
-      }
-    }, 1000);
-  }, []);
+
   return (
     <>
       <section className="hero spad set-bg" data-setbg={""}>
-        <video id="video-background" muted loop src={Video} autoPlay={true} />
         <div className="container">
           <div className="row">
             <div className="col-lg-7">

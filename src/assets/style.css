@@ -30,6 +30,7 @@
 
 /* Template default CSS
 /*----------------------------------------*/
+
 :root {
   --color-1: black;
   --color-2: #c20e0e;
@@ -105,14 +106,32 @@ textarea:focus {
 a {
   color: white !important;
   text-decoration: none !important;
+  font-weight: bold;
 }
+
 a:hover,
 a:focus {
   text-decoration: none;
   outline: none;
-  color: white !important;
+  color: var(--color-2) !important;
+  transition: 0.5s;
 }
-
+.nav-dash a {
+  color: white !important;
+  text-decoration: none !important;
+}
+.side-dash a {
+  color: white !important;
+  text-decoration: none !important;
+  font-weight: bold;
+}
+.nav-dash a i {
+  color: black !important;
+  text-decoration: none !important;
+}
+.dash-content {
+  background-color: rgba(0, 0, 0, 0.1) !important;
+}
 ul,
 ol {
   padding: 0;
@@ -183,7 +202,10 @@ ol {
   background: var(--color-2);
   border-radius: 2px;
 }
-
+.primary-btn:hover {
+  color: black !important;
+  cursor: pointer;
+}
 .site-btn {
   font-size: 15px;
   color: #ffffff;
@@ -622,7 +644,9 @@ ol {
   -o-transition: 0.3s;
   transition: 0.3s;
 }
-
+.active {
+  color: white !important;
+}
 .hero__tab .nav-tabs .nav-item .nav-link.active:after {
   opacity: 1;
   bottom: -7px;

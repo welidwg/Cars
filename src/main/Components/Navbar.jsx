@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import Logo from "../../assets/5.png";
 import $ from "jquery";
 import { useEffect } from "react";
+import ModalWrapper from "./ModalWrapper";
 
 export default function Navbar(props) {
   useEffect(() => {
@@ -81,8 +82,8 @@ export default function Navbar(props) {
             <div className="header__nav">
               <nav className="header__menu">
                 <ul>
-                  <li className="active">
-                    <a href="./index.html">Home</a>
+                  <li className="">
+                    <NavLink to={"/"}>Home</NavLink>
                   </li>
                   <li>
                     <a href="./car.html">Cars</a>
@@ -121,9 +122,9 @@ export default function Navbar(props) {
                     <i className="fas fa-search"></i>
                   </a>
                 </div>
-                <a href="#" className="primary-btn">
-                  Add Car
-                </a>
+                <NavLink to={"/login"} className="primary-btn">
+                  Login
+                </NavLink>
               </div>
             </div>
           </div>

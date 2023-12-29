@@ -3,9 +3,38 @@ import Navbar from "../Components/Navbar";
 import SideBar from "../Components/SideBar";
 import $ from "jquery";
 import { useEffect } from "react";
+import Video from "../../assets/video.mp4";
+const styles = import("../../assets/style.css");
+const style1 = import("../../indexx.css");
 
 export default function Wrapper(props) {
-  useEffect(() => {}, []);
+  useEffect(() => {
+    let video = document.getElementById("video-background");
+    if (video != undefined) {
+      video.playbackRate = 0.8;
+      setInterval(() => {
+        if (video.currentTime > 6.6) {
+          video.pause();
+        }
+      }, 1000);
+    }
+    $(".loader").fadeOut();
+    $("#preloder").delay(200).fadeOut("slow");
+    $(window).on("load", function () {
+      $(".filter__controls li").on("click", function () {
+        $(".filter__controls li").removeClass("active");
+        $(this).addClass("active");
+      });
+      if ($(".car-filter").length > 0) {
+        var containerEl = document.querySelector(".car-filter");
+        // var mixer = mixitup(containerEl);
+      }
+      // $(".set-bg").each(function () {
+      //   var bg = $(this).data("setbg");
+      //   $(this).css("background-image", "url(" + bg + ")");
+      // });
+    });
+  }, []);
   return (
     <>
       <div id="preloder">
@@ -14,7 +43,11 @@ export default function Wrapper(props) {
       <div className="offcanvas-menu-overlay"></div>
       <SideBar />
       <Navbar />
-      <section>{props.children}</section>
+      <section>
+        <video id="video-background" muted loop src={Video} autoPlay={true} />
+
+        {props.children}
+      </section>
       <Footer />
       <div class="search-model">
         <div class="h-100 d-flex align-items-center justify-content-center">

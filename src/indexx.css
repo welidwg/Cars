@@ -1,10 +1,15 @@
 @import url("https://fonts.googleapis.com/css?family=Raleway");
+@import-normalize;
+
 :root {
   --color-1: black;
   --color-2: #c20e0e;
   --glow-color: #c20e0e;
 }
 
+.bg-color-1 {
+  background-color: var(--color-2) !important;
+}
 body {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
