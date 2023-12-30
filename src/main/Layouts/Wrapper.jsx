@@ -2,13 +2,19 @@ import Footer from "../Components/Footer";
 import Navbar from "../Components/Navbar";
 import SideBar from "../Components/SideBar";
 import $ from "jquery";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Video from "../../assets/video.mp4";
+import { useLocation, useParams } from "react-router";
 const styles = import("../../assets/style.css");
 const style1 = import("../../indexx.css");
 
 export default function Wrapper(props) {
+  const [isDash, setIsDash] = useState(false);
+  const location = useLocation();
+  const isDashb = location.pathname.startsWith("/dash");
+
   useEffect(() => {
+    setIsDash(window.location.pathname.startsWith("dash"));
     let video = document.getElementById("video-background");
     if (video != undefined) {
       video.playbackRate = 0.8;
@@ -41,26 +47,35 @@ export default function Wrapper(props) {
         <div className="loader"></div>
       </div>
       <div className="offcanvas-menu-overlay"></div>
-      <SideBar />
-      <Navbar />
+      {!isDashb ? (
+        <>
+          <SideBar />
+          <Navbar />
+        </>
+      ) : null}
+
       <section>
         <video id="video-background" muted loop src={Video} autoPlay={true} />
 
         {props.children}
       </section>
-      <Footer />
-      <div class="search-model">
-        <div class="h-100 d-flex align-items-center justify-content-center">
-          <div class="search-close-switch">+</div>
-          <form class="search-model-form">
-            <input
-              type="text"
-              id="search-input"
-              placeholder="Search here....."
-            />
-          </form>
-        </div>
-      </div>
+      {!isDashb && (
+        <>
+          <Footer />
+          <div class="search-model">
+            <div class="h-100 d-flex align-items-center justify-content-center">
+              <div class="search-close-switch">+</div>
+              <form class="search-model-form">
+                <input
+                  type="text"
+                  id="search-input"
+                  placeholder="Search here....."
+                />
+              </form>
+            </div>
+          </div>
+        </>
+      )}
     </>
   );
 }

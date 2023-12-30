@@ -1,4 +1,5 @@
 import OwlCarousel from "react-owl-carousel";
+import { NavLink } from "react-router-dom";
 
 export default function CarCard(props) {
   return (
@@ -38,19 +39,19 @@ export default function CarCard(props) {
             </h5>
             <ul>
               <li>
-                <span>35,000</span> mi
+                <span>35,000</span> kms
               </li>
               <li>Auto</li>
               <li>
-                <span>700</span> hp
+                <span>Diesel</span>
               </li>
             </ul>
           </div>
           <div class=" d-flex justify-content-between align-items-center">
-            <span class="car-option bg-primary">$319</span>
-            <a className="btn text-dark ">
+            <span class="car-option bg-dark">20000 dt</span>
+            <NavLink to={"/car/detail"} className="btn text-dark ">
               <i className="fas fa-arrow-right"></i>
-            </a>
+            </NavLink>
           </div>
         </div>
       </div>

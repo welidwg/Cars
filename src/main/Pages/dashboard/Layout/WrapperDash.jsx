@@ -12,16 +12,16 @@ export default function WrapperDash(props) {
     });
   }, []);
   return (
-    <div className="container-xxl position-relative bg-dark d-flex p-0">
+    <div className="container position-relative bg-dark d-flex ">
       {/* sidebar */}
-      <SideBarDash />
+      {/* <SideBarDash /> */}
 
-      <div className="content bg-dark">
+      <div className="d-flex flex-column  w-100  bg-dark p-4 vh-100">
         {/* navbar */}
         <NavbarDash />
         {/* main */}
-        <div className="container-fluid pt-4 px-4 bg-dark">
-          <div className="row vh-100 bg-secondary dash-content  rounded align-items-center justify-content-center mx-0">
+        <div className="container-fluid pt-4  bg-dark">
+          <div className="row  bg-secondary dash-content    mx-0">
             {props.children}
           </div>
         </div>

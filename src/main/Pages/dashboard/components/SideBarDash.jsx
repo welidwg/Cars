@@ -1,8 +1,9 @@
+import { NavLink } from "react-router-dom";
 import logo from "../../../../assets/5.png";
 export default function SideBarDash(props) {
   return (
     <>
-      <div className="sidebar side-dash bg-dark pe-4 pb-3">
+      <div className="sidebar side-dash bg-dark pe-4 pb-3 open">
         <nav className="navbar bg-transparent navbar-light">
           <a href="index.html" className="navbar-brand mx-4 mb-3">
             <h3 className="text-primary">
@@ -25,13 +26,13 @@ export default function SideBarDash(props) {
             </div>
           </div> */}
           <div className="navbar-nav w-100">
-            <a href="index.html" className="nav-item nav-link">
+            {/* <NavLink to={"/dash"} className="nav-item nav-link">
               <i className="fas fa-tachometer-alt me-2 text-dark"></i>Dashboard
-            </a>
+            </NavLink> */}
 
-            <a href="index.html" className="nav-item nav-link">
+            <NavLink to={"/dash/cars"} className="nav-item nav-link">
               <i className="fas fa-cars me-2 text-dark"></i>Cars
-            </a>
+            </NavLink>
             <div className="nav-item dropdown">
               <a
                 href="#"
@@ -49,6 +50,9 @@ export default function SideBarDash(props) {
                 </a>
               </div>
             </div>
+            <NavLink to={"/"} className="nav-item nav-link mt-5">
+              <i className="fas fa-arrow-left me-2 text-dark"></i>Go back
+            </NavLink>
           </div>
         </nav>
       </div>

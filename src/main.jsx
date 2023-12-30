@@ -5,5 +5,5 @@ import { BrowserRouter } from "react-router-dom";
 import Dash from "./Dash.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <BrowserRouter>{1 ? <Dash /> : <App />}</BrowserRouter>
+  <BrowserRouter>{<App />}</BrowserRouter>
 );

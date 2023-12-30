@@ -13,7 +13,7 @@ export default function SideBar(props) {
             <i className="fas fa-search"></i>
           </a>
           <a href="#" className="primary-btn">
-            Add Car
+            Login
           </a>
         </div>
         <div className="offcanvas__logo">

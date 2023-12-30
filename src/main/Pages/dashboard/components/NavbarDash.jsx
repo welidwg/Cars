@@ -1,21 +1,23 @@
+import { NavLink } from "react-router-dom";
+
 export default function NavbarDash(props) {
   return (
     <nav className="navbar navbar-expand bg-color-1 rounded-pill navbar-light sticky-top px-4 py-0 nav-dash">
-      <a href="index.html" className="navbar-brand d-flex d-lg-none me-4">
-        <h2 className="text-primary mb-0">
-          <i className="fa fa-hashtag text-dark"></i>
-        </h2>
-      </a>
-      <a href="#" className="sidebar-toggler flex-shrink-0">
-        <i className="fa fa-bars text-dark"></i>
-      </a>
-      <form className="d-none d-md-flex ms-4">
-        <input
-          className="form-control border-0"
-          type="search"
-          placeholder="Search"
-        />
-      </form>
+      <NavLink to="/" className=" flex-shrink-0">
+        <i className="fal fa-arrow-left text-dark"></i>
+      </NavLink>
+      <div className="mx-auto d-flex align-items-center">
+        {/* <NavLink to="/dash/index" className="nav-link link-nav">
+          Dashboard
+        </NavLink> */}
+        <NavLink to="/dash/cars" className="nav-link link-nav">
+          Vos Voitures
+        </NavLink>
+        <NavLink to="/dash/profile" className="nav-link link-nav">
+          Mon profile
+        </NavLink>
+      </div>
+
       <div className="navbar-nav align-items-center ms-auto">
         {/* <div className="nav-item dropdown">
           <a
@@ -101,21 +103,15 @@ export default function NavbarDash(props) {
           >
             <img
               className="rounded-circle me-lg-2"
-              src="dash/img/user.jpg"
+              src="/dash/img/user.jpg"
               alt=""
               style={{ width: "40px", height: "40px" }}
             />
-            <span className="d-none text-light d-lg-inline-flex">John Doe</span>
+            <span className="d-none text-light d-lg-inline-flex">Welid WG</span>
           </a>
           <div className="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-            <a href="#" className="dropdown-item ">
-              My Profile
-            </a>
             <a href="#" className="dropdown-item">
-              Settings
-            </a>
-            <a href="#" className="dropdown-item">
-              Log Out
+              Déconnexion
             </a>
           </div>
         </div>

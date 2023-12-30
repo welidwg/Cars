@@ -31,16 +31,14 @@ export default function LoginPage(props) {
                   <div className="col-lg-6">
                     <div className="p-5">
                       <div className="text-center">
-                        <h4 className="text-dark mb-4">Welcome Back!</h4>
+                        <h4 className="text-dark mb-4">Bienvenue!</h4>
                       </div>
                       <form className="user">
                         <div className="mb-3">
                           <input
                             className="form-control form-control-user"
                             type="email"
-                            id="exampleInputEmail"
-                            aria-describedby="emailHelp"
-                            placeholder="Enter Email Address..."
+                            placeholder="Votre email"
                             name="email"
                           />
                         </div>
@@ -48,8 +46,7 @@ export default function LoginPage(props) {
                           <input
                             className="form-control form-control-user"
                             type="password"
-                            id="exampleInputPassword"
-                            placeholder="Password"
+                            placeholder="Votre mot de passe"
                             name="password"
                           />
                         </div>
@@ -74,11 +71,10 @@ export default function LoginPage(props) {
                           className=" primary-btn  d-block btn-user w-100 text-center"
                           type="submit"
                         >
-                          Login
+                          Connexion
                         </a>
-
-                        <hr />
                       </form>
+                      <hr />
                       {/* <div className="text-center">
                         <a className="small text-dark" href="">
                           Forgot Password?
@@ -86,7 +82,7 @@ export default function LoginPage(props) {
                       </div> */}
                       <div className="text-center">
                         <NavLink to={"/register"} className="small text-dark">
-                          Create an Account!
+                          Créez un compte !
                         </NavLink>
                       </div>
                     </div>

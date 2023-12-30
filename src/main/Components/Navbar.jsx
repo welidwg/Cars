@@ -83,33 +83,13 @@ export default function Navbar(props) {
               <nav className="header__menu">
                 <ul>
                   <li className="">
-                    <NavLink to={"/"}>Home</NavLink>
+                    <NavLink to={"/"}>Accueil</NavLink>
                   </li>
                   <li>
-                    <a href="./car.html">Cars</a>
+                    <a href="./car.html">Voitures</a>
                   </li>
                   <li>
-                    <a href="./blog.html">Blog</a>
-                  </li>
-                  <li>
-                    <a href="#">Pages</a>
-                    <ul className="dropdown">
-                      <li>
-                        <a href="./about.html">About Us</a>
-                      </li>
-                      <li>
-                        <a href="./car-details.html">Car Details</a>
-                      </li>
-                      <li>
-                        <a href="./blog-details.html">Blog Details</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <a href="./about.html">About</a>
-                  </li>
-                  <li>
-                    <a href="./contact.html">Contact</a>
+                    <NavLink to={"/dash/cars"}>Mon espace</NavLink>
                   </li>
                 </ul>
               </nav>
@@ -123,7 +103,7 @@ export default function Navbar(props) {
                   </a>
                 </div>
                 <NavLink to={"/login"} className="primary-btn">
-                  Login
+                  Connexion
                 </NavLink>
               </div>
             </div>

@@ -3,7 +3,7 @@ import Logo from "../../assets/4.png";
 export default function Footer(params) {
   return (
     <>
-      <footer class="footer set-bg">
+      <footer class="footer set-bg bg-dark">
         <div class="container">
           <div class="footer__contact">
             <div class="row">

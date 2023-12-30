@@ -31,14 +31,16 @@ export default function Register(props) {
                   <div className="col-lg-6">
                     <div className="p-5">
                       <div className="text-center">
-                        <h4 className="text-dark mb-4">Create your account!</h4>
+                        <h4 className="text-dark mb-4">
+                          Créez un compte chez AutoBot!
+                        </h4>
                       </div>
                       <form className="user">
                         <div className="mb-3">
                           <input
                             className="form-control form-control-user  shadow-none "
                             type="text"
-                            placeholder="Enter your username..."
+                            placeholder="Donnez un nom d'utilisateur..."
                             name="username"
                           />
                         </div>
@@ -46,7 +48,7 @@ export default function Register(props) {
                           <input
                             className="form-control form-control-user  shadow-none "
                             type="email"
-                            placeholder="Enter Email Address..."
+                            placeholder="Donnez votre email.."
                             name="email"
                           />
                         </div>
@@ -54,7 +56,7 @@ export default function Register(props) {
                           <input
                             className="form-control form-control-user  shadow-none "
                             type="tel"
-                            placeholder="Enter your phone number..."
+                            placeholder="Donnez votre numéro téléphone.."
                             name="phone"
                           />
                         </div>
@@ -62,7 +64,7 @@ export default function Register(props) {
                           <input
                             className="form-control form-control-user  shadow-none "
                             type="password"
-                            placeholder="Password"
+                            placeholder="Mot de passe"
                             name="password"
                           />
                         </div>
@@ -70,8 +72,8 @@ export default function Register(props) {
                           <input
                             className="form-control form-control-user  shadow-none "
                             type="password"
-                            placeholder="Repeat your password"
-                            name="password"
+                            placeholder="Répétez votre mot de passe"
+                            name="repeat_password"
                           />
                         </div>
                         {/* <div className="mb-3">
@@ -95,7 +97,7 @@ export default function Register(props) {
                           className=" primary-btn  d-block btn-user w-100 text-center"
                           type="submit"
                         >
-                          Start your experience
+                          Commencez votre experience
                         </a>
 
                         <hr />
@@ -107,7 +109,7 @@ export default function Register(props) {
                       </div> */}
                       <div className="text-center">
                         <NavLink to={"/login"} className="small text-dark">
-                          Already have an account ? Login now!
+                          Vous avez déjà un compte ? Connectez-vous maintenant!
                         </NavLink>
                       </div>
                     </div>

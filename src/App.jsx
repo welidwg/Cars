@@ -12,6 +12,11 @@ import Register from "./main/Pages/Register";
 import NotFound from "./main/Pages/error/NotFound";
 import IndexDashboard from "./main/Pages/dashboard/IndexDashboard";
 import WrapperDash from "./main/Pages/dashboard/Layout/WrapperDash";
+import Dash from "./Dash";
+import CarsPage from "./main/Pages/dashboard/CarsPage";
+import Profile from "./main/Pages/dashboard/Profile";
+import AddCarPage from "./main/Pages/dashboard/AddCarPage";
+import CarDetails from "./main/Pages/CarDetails";
 function App() {
   useEffect(() => {
     $(".loader").fadeOut();
@@ -34,17 +39,22 @@ function App() {
   }, []);
 
   return (
-    <React.StrictMode>
+    <>
       <Wrapper>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/car/detail" element={<CarDetails />} />
+          <Route path="/dash/index" element={<IndexDashboard />} />
+          <Route path="/dash/cars" element={<CarsPage />} />
+          <Route path="/dash/profile" element={<Profile />} />
+          <Route path="/dash/cars/new" element={<AddCarPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Wrapper>
-    </React.StrictMode>
+    </>
   );
 }
 

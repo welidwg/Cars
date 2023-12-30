@@ -1,8 +1,7 @@
 import { useEffect } from "react";
-
+import { NavLink } from "react-router-dom";
 
 export default function Header(props) {
-
   return (
     <>
       <section className="hero spad set-bg" data-setbg={""}>
@@ -11,20 +10,17 @@ export default function Header(props) {
             <div className="col-lg-7">
               <div className="hero__text">
                 <div className="hero__text__title">
-                  <span>FIND YOUR DREAM CAR</span>
-                  <h2>Porsche Cayenne S</h2>
+                  <span>Trouvez votre voiture de rêve Chez</span>
+                  <h2 className=""> AUTOBOT</h2>
                 </div>
-                <div className="hero__text__price">
-                  <div className="car-model">Model 2019</div>
-                  <h2>
-                    $399<span>/Month</span>
-                  </h2>
-                </div>
-                <a href="#" className="primary-btn">
-                  <img src="/img/wheel.png" alt="" /> Test Drive
-                </a>
+
+                <NavLink to={"/register"} href="#" className="primary-btn">
+                  <i class="fa fa-user-plus" aria-hidden="true"></i> Créer un
+                  compte
+                </NavLink>
                 <a href="#" className="primary-btn more-btn">
-                  Learn More
+                  <i class="fa fa-question-circle" aria-hidden="true"></i> En
+                  savoir plus
                 </a>
               </div>
             </div>
@@ -33,12 +29,12 @@ export default function Header(props) {
                 <ul className="nav nav-tabs" role="tablist">
                   <li className="nav-item">
                     <a
-                      className="nav-link active text-dark"
+                      className="nav-link  text-dark"
                       data-toggle="tab"
                       href="#tabs-2"
                       role="tab"
                     >
-                      Find a car
+                      Recherche une voiture
                     </a>
                   </li>
                   {/* <li className="nav-item">
@@ -55,13 +51,12 @@ export default function Header(props) {
                 <div className="tab-content">
                   <div className="tab-pane active" id="tabs-2" role="tabpanel">
                     <div className="hero__tab__form">
-                      <h2>Search for a car</h2>
+                      <h2>Rechercher une voiture</h2>
                       <form>
                         <div className="select-list">
                           <div className="select-list-item">
-                            <p>Select Year</p>
-                            <select>
-                              <option data-display=" ">Select Year</option>
+                            <p>Choisissez l'année</p>
+                            <select className="form-select">
                               <option value="">2020</option>
                               <option value="">2017</option>
                               <option value="">2018</option>
@@ -71,9 +66,8 @@ export default function Header(props) {
                             </select>
                           </div>
                           <div className="select-list-item">
-                            <p>Select Brand</p>
-                            <select>
-                              <option data-display=" ">Select Brand</option>
+                            <p>Choisissez la marque</p>
+                            <select className="form-select">
                               <option value="">Acura</option>
                               <option value="">Audi</option>
                               <option value="">Bentley</option>
@@ -82,18 +76,16 @@ export default function Header(props) {
                             </select>
                           </div>
                           <div className="select-list-item">
-                            <p>Select Model</p>
-                            <select>
-                              <option data-display=" ">Select Model</option>
+                            <p>Choisissez le Model</p>
+                            <select className="form-select">
                               <option value="">Q3</option>
                               <option value="">A4 </option>
                               <option value="">AVENTADOR</option>
                             </select>
                           </div>
                           <div className="select-list-item">
-                            <p>Select Mileage</p>
-                            <select>
-                              <option data-display=" ">Select Mileage</option>
+                            <p>Choisissez la Kilométrage </p>
+                            <select className="form-select">
                               <option value="">27</option>
                               <option value="">25</option>
                               <option value="">15</option>
@@ -101,19 +93,9 @@ export default function Header(props) {
                             </select>
                           </div>
                         </div>
-                        <div className="car-price">
-                          <p>Price Range:</p>
-                          <div className="price-range-wrap">
-                            <div className="price-range"></div>
-                            <div className="range-slider">
-                              <div className="price-input">
-                                <input type="text" id="amount" />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+
                         <button type="submit" className="site-btn">
-                          Searching
+                          Chercher
                         </button>
                       </form>
                     </div>
