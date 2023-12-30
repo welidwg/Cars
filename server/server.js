@@ -1,16 +1,9 @@
 import express from "express";
 import mysql from "mysql";
 import sequelize from "./databases/sequelize.js";
-import User from "./models/User.js";
-import {
-  createUser,
-  getAllUsers,
-  getUserById,
-  loginUser,
-  updateUser,
-} from "./controllers/UserController.js";
 import bodyParser from "body-parser";
 import userRouter from "./routes/UserRoutes.js";
+import carRouter from "./routes/CarRoutes.js";
 const app = express();
 const port = process.env.PORT || 5000;
 const connection = mysql.createConnection({
@@ -34,6 +27,8 @@ sequelize
 //user routes
 app.use(bodyParser.json());
 app.use("/api/", userRouter);
+app.use("/api/", carRouter);
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

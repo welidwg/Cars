@@ -1,5 +1,6 @@
 import sequelize from "../databases/sequelize.js";
 import { DataTypes } from "sequelize";
+import Car from "./Car.js";
 
 const User = sequelize.define("User", {
   username: {
@@ -27,4 +28,6 @@ const User = sequelize.define("User", {
     defaultValue: 1,
   },
 });
+User.hasMany(Car, { foreignKey: "owner_id", as: "cars" });
+Car.belongsTo(User, { foreignKey: "owner_id", as: "owner" });
 export default User;

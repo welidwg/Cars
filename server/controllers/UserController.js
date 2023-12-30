@@ -1,6 +1,7 @@
 import User from "../models/User.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import Car from "../models/Car.js";
 const JWT_SECRET = "cars-bugatty";
 
 let saltRounds = 10;
@@ -51,7 +52,7 @@ export const createUser = async (userData) => {
 
 export const getAllUsers = async () => {
   try {
-    const users = await User.findAll();
+    const users = await User.findAll({ include: [{ model: Car, as: "cars" }] });
     return users;
   } catch (error) {
     console.error("Error fetching users:", error);
