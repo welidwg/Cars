@@ -6,22 +6,33 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "server": "nodemon server/server.js",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "all": "concurrently \"npm run server\" \"npm run dev\""
   },
   "dependencies": {
     "aos": "^2.3.4",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
     "bootstrap": "^5.3.2",
+    "concurrently": "^8.2.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
     "jquery": "^3.7.1",
-    "jquery-nice-select": "^1.1.0",
+    "jsonwebtoken": "^9.0.2",
     "mixitup": "^3.3.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.6.5",
     "nice-select2": "^2.1.0",
+    "nodemon": "^3.0.2",
     "owl.carousel": "^2.3.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-owl-carousel": "^2.3.3",
     "react-router": "^6.20.0",
-    "react-router-dom": "^6.20.0"
+    "react-router-dom": "^6.20.0",
+    "sequelize": "^6.35.2"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",
