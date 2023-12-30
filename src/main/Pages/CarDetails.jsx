@@ -102,31 +102,22 @@ export default function CarDetails(props) {
             <div className="col-lg-3">
               <div className="car__details__sidebar">
                 <div className="car__details__sidebar__model">
-                  <a href="#" className="primary-btn">
-                    Get Today Is Price
-                  </a>
                   <p>Pricing in 11/26/2019</p>
                 </div>
                 <div className="car__details__sidebar__payment">
                   <ul>
                     <li>
-                      MSRP <span>$120,000</span>
+                      Prix actuel <span>{car.price} TND</span>
                     </li>
                     <li>
-                      Dealer Discounts <span>$3,000</span>
-                    </li>
-                    <li>
-                      Price <span>$117,000</span>
+                      Prix estimé <span>{car.price} TND</span>
                     </li>
                   </ul>
                   <a href="#" className="primary-btn">
-                    <i className="fa fa-credit-card"></i> Express Purchase
+                    <i className="fas fa-phone"></i> Contactez le propriétaire
                   </a>
                   <a href="#" className="primary-btn n">
-                    <i className="fa fa-sliders"></i> Build Payment
-                  </a>
-                  <a href="#" className="primary-btn ">
-                    <i className="fa fa-money"></i> Value Trade
+                    <i class="fas fa-exclamation"></i> Rapporter
                   </a>
                 </div>
               </div>
