@@ -2,6 +2,7 @@ import axios from "axios";
 import { useParams } from "react-router";
 import { URL, URL_IMG } from "../../constants";
 import { useEffect, useState } from "react";
+import OwlCarousel from "react-owl-carousel";
 
 export default function CarDetails(props) {
   const [car, setCar] = useState(null);
@@ -33,11 +34,34 @@ export default function CarDetails(props) {
             <div className="col-lg-9 :">
               <div className="car__details__pic">
                 <div className="car__details__pic__large">
-                  <img
-                    className="car-big-img"
-                    src={`${URL_IMG}/${car.photos[0]}`}
-                    alt=""
-                  />
+                  <OwlCarousel
+                    className="car__item__pic__slider owl-carousel owl-theme bg-light "
+                    loop
+                    auto
+                    style={{ height: "500px" }}
+                    margin={10}
+                    items={1}
+                    nav={false}
+                    dots={false}
+                  >
+                    {car && car.photos.length != 0 ? (
+                      car.photos.map((pic, i) => {
+                        return (
+                          <div className="item" key={i}>
+                            {" "}
+                            <img
+                              className=""
+                              style={{ height: "500px" }}
+                              src={`${URL_IMG}/${pic}`}
+                              alt={pic}
+                            />
+                          </div>
+                        );
+                      })
+                    ) : (
+                      <></>
+                    )}
+                  </OwlCarousel>
                 </div>
                 <div className="row">
                   <div className="col-lg-6 col-md-6 ">
