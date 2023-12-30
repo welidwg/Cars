@@ -62,7 +62,9 @@ export const getAllUsers = async () => {
 
 export const getUserById = async (userId) => {
   try {
-    const user = await User.findByPk(userId);
+    const user = await User.findByPk(userId, {
+      include: [{ model: Car, as: "cars" }],
+    });
     return user;
   } catch (error) {
     console.error("Error fetching user by ID:", error);

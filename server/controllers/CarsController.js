@@ -12,7 +12,7 @@ export const createCar = async (req, res) => {
 };
 export const getAllCars = async (req, res) => {
   try {
-    const cars = await Car.findAll();
+    const cars = await Car.findAll({ include: [{ model: User, as: "owner" }] });
     res.json(cars);
   } catch (error) {
     console.error("Error getting cars:", error);
