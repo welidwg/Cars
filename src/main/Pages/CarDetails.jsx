@@ -1,82 +1,97 @@
+import axios from "axios";
+import { useParams } from "react-router";
+import { URL, URL_IMG } from "../../constants";
+import { useEffect, useState } from "react";
+
 export default function CarDetails(props) {
-  return (
+  const [car, setCar] = useState(null);
+  const params = useParams();
+  useEffect(() => {
+    const id = params.id;
+    axios.get(`${URL}/cars/${id}`).then((res) => setCar(res.data));
+  }, []);
+  return car == null ? (
+    <>Loading</>
+  ) : (
     <>
-      <div class="breadcrumb-option bg-dark">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-12 text-center">
-              <div class="breadcrumb__text">
-                <h2>Porsche Cayenne Turbo S 2019</h2>
+      <div className="breadcrumb-option bg-dark">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-12 text-center">
+              <div className="breadcrumb__text">
+                <h2>
+                  {car.brand} | {car.model}{" "}
+                </h2>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <section class="car-details spad bg-dark">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-9 :">
-              <div class="car__details__pic">
-                <div class="car__details__pic__large">
+      <section className="car-details spad bg-dark">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-9 :">
+              <div className="car__details__pic">
+                <div className="car__details__pic__large">
                   <img
-                    class="car-big-img"
-                    src="/img/cars/details/cd-1.jpg"
+                    className="car-big-img"
+                    src={`${URL_IMG}/${car.photos[0]}`}
                     alt=""
                   />
                 </div>
                 <div className="row">
-                  <div class="col-lg-6 col-md-6 ">
-                    <div class="car__details__tab__info__item  ">
+                  <div className="col-lg-6 col-md-6 ">
+                    <div className="car__details__tab__info__item  ">
                       <h5 className=" text-light">Informations générales</h5>
                       <ul className="">
                         <li className=" text-light ">
-                          <i class="fa fa-check"></i>{" "}
+                          <i className="fa fa-check"></i>{" "}
                           <span className="fw-bold  color-1">Marque : </span>
-                          Mercedes-Benz
+                          {car.brand}
                         </li>
                         <li className=" text-light ">
-                          <i class="fa fa-check"></i>
+                          <i className="fa fa-check"></i>
                           <span className="fw-bold color-1">Modèle :</span>
-                          AMG
+                          {car.model}
                         </li>
                         <li className=" text-light ">
-                          <i class="fa fa-check"></i>
+                          <i className="fa fa-check"></i>
                           <span className="fw-bold color-1">Kilométrage :</span>
-                          AMG
+                          {car.kms} Kms
                         </li>
                         <li className=" text-light ">
-                          <i class="fa fa-check"></i>
-                          <span className="fw-bold color-1">Engine :</span>
-                          AMG
+                          <i className="fa fa-check"></i>
+                          <span className="fw-bold color-1">Energie :</span>
+                          {car.energie}
                         </li>
                         <li className=" text-light ">
-                          <i class="fa fa-check"></i>
+                          <i className="fa fa-check"></i>
                           <span className="fw-bold color-1">Boite :</span>
-                          AMG
+                          {car.boite}
                         </li>
                         <li className=" text-light ">
-                          <i class="fa fa-check"></i>
+                          <i className="fa fa-check"></i>
                           <span className="fw-bold color-1">Année :</span>
-                          AMG
+                          {car.year}
                         </li>
                       </ul>
                     </div>
                   </div>
-                  <div class="col-lg-6 col-md-6 ">
-                    <div class="car__details__tab__info__item  ">
+                  <div className="col-lg-6 col-md-6 ">
+                    <div className="car__details__tab__info__item  ">
                       <h5 className=" text-light">
                         Informations du propriétaire
                       </h5>
                       <ul className="">
                         <li className=" text-light ">
-                          <i class="fa fa-check"></i>{" "}
+                          <i className="fa fa-check"></i>{" "}
                           <span className="fw-bold  color-1">Nom : &nbsp;</span>
-                          Welid Wg
+                          {car.owner.username}
                         </li>
                         <li className=" text-light ">
-                          <i class="fa fa-check"></i>
+                          <i className="fa fa-check"></i>
                           <span className="fw-bold color-1">Mobile :</span>
-                          556678986
+                          {car.owner.phone}
                         </li>
                       </ul>
                     </div>
@@ -84,15 +99,15 @@ export default function CarDetails(props) {
                 </div>
               </div>
             </div>
-            <div class="col-lg-3">
-              <div class="car__details__sidebar">
-                <div class="car__details__sidebar__model">
-                  <a href="#" class="primary-btn">
+            <div className="col-lg-3">
+              <div className="car__details__sidebar">
+                <div className="car__details__sidebar__model">
+                  <a href="#" className="primary-btn">
                     Get Today Is Price
                   </a>
                   <p>Pricing in 11/26/2019</p>
                 </div>
-                <div class="car__details__sidebar__payment">
+                <div className="car__details__sidebar__payment">
                   <ul>
                     <li>
                       MSRP <span>$120,000</span>
@@ -104,14 +119,14 @@ export default function CarDetails(props) {
                       Price <span>$117,000</span>
                     </li>
                   </ul>
-                  <a href="#" class="primary-btn">
-                    <i class="fa fa-credit-card"></i> Express Purchase
+                  <a href="#" className="primary-btn">
+                    <i className="fa fa-credit-card"></i> Express Purchase
                   </a>
-                  <a href="#" class="primary-btn n">
-                    <i class="fa fa-sliders"></i> Build Payment
+                  <a href="#" className="primary-btn n">
+                    <i className="fa fa-sliders"></i> Build Payment
                   </a>
-                  <a href="#" class="primary-btn ">
-                    <i class="fa fa-money"></i> Value Trade
+                  <a href="#" className="primary-btn ">
+                    <i className="fa fa-money"></i> Value Trade
                   </a>
                 </div>
               </div>

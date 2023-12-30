@@ -35,6 +35,10 @@ const Car = sequelize.define("Car", {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
+  photos: {
+    type: DataTypes.JSON,
+    allowNull: true,
+  },
 });
 
 export default Car;

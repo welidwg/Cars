@@ -5,8 +5,10 @@ import $ from "jquery";
 import { useEffect, useState } from "react";
 import Video from "../../assets/video.mp4";
 import { useLocation, useParams } from "react-router";
+import { ToastContainer } from "react-toastify";
 const styles = import("../../assets/style.css");
 const style1 = import("../../indexx.css");
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Wrapper(props) {
   const [isDash, setIsDash] = useState(false);
@@ -55,6 +57,7 @@ export default function Wrapper(props) {
       ) : null}
 
       <section>
+        <ToastContainer />
         <video id="video-background" muted loop src={Video} autoPlay={true} />
 
         {props.children}

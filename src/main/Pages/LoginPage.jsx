@@ -1,7 +1,42 @@
 import { NavLink } from "react-router-dom";
 import Wrapper from "../Layouts/Wrapper";
+import { useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function LoginPage(props) {
+  const [loginData, setLoginData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setLoginData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:5000/api/users/login", loginData)
+      .then((res) => {
+        toast.success("Bien connecté", { autoClose: 1000 });
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 1000);
+      })
+      .catch((err) => {
+        if (err.response && err.response.data && err.response.data.error)
+          toast.error(err.response.data.error);
+        else toast.error("Erreur de serveur");
+      });
+
+    // You can send an API request for user authentication here
+  };
   return (
     <>
       <div
@@ -33,13 +68,15 @@ export default function LoginPage(props) {
                       <div className="text-center">
                         <h4 className="text-dark mb-4">Bienvenue!</h4>
                       </div>
-                      <form className="user">
+                      <form className="user" onSubmit={handleSubmit}>
                         <div className="mb-3">
                           <input
                             className="form-control form-control-user"
                             type="email"
                             placeholder="Votre email"
                             name="email"
+                            value={loginData.email}
+                            onChange={handleChange}
                           />
                         </div>
                         <div className="mb-3">
@@ -48,6 +85,8 @@ export default function LoginPage(props) {
                             type="password"
                             placeholder="Votre mot de passe"
                             name="password"
+                            value={loginData.password}
+                            onChange={handleChange}
                           />
                         </div>
                         {/* <div className="mb-3">
@@ -67,12 +106,12 @@ export default function LoginPage(props) {
                             </div>
                           </div>
                         </div> */}
-                        <a
+                        <button
                           className=" primary-btn  d-block btn-user w-100 text-center"
                           type="submit"
                         >
                           Connexion
-                        </a>
+                        </button>
                       </form>
                       <hr />
                       {/* <div className="text-center">

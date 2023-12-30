@@ -1,7 +1,62 @@
 import { NavLink } from "react-router-dom";
 import Wrapper from "../Layouts/Wrapper";
+import { useState } from "react";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { URL } from "../../constants";
 
 export default function Register(props) {
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    phone: "",
+    password: "",
+    repeat_password: "",
+  });
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: null,
+    }));
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (formData.password !== formData.repeat_password) {
+      toast.error("Please confirm your password");
+    } else {
+      axios
+        .post(`${URL}/users`, formData)
+        .then((res) => {
+          toast.success("Compte bien crée !");
+          window.location.href = "/login";
+        })
+        .catch((error) => {
+          if (
+            error.response &&
+            error.response.data &&
+            error.response.data.error &&
+            error.response.data.error.errors
+          ) {
+            const validationErrors = error.response.data.error.errors;
+            const fieldErrors = validationErrors.reduce((acc, error) => {
+              acc[error.path] = error.message;
+              return acc;
+            }, {});
+            setErrors(fieldErrors);
+          } else {
+            toast.error("Erreur de serveur");
+            console.log(error);
+          }
+        });
+    }
+  };
   return (
     <>
       <div
@@ -35,22 +90,33 @@ export default function Register(props) {
                           Créez un compte chez AutoBot!
                         </h4>
                       </div>
-                      <form className="user">
+                      <form className="user" onSubmit={handleSubmit}>
                         <div className="mb-3">
                           <input
                             className="form-control form-control-user  shadow-none "
                             type="text"
                             placeholder="Donnez un nom d'utilisateur..."
                             name="username"
+                            value={formData.username}
+                            onChange={handleChange}
                           />
+                          {errors.username && (
+                            <div className="text-danger">{errors.username}</div>
+                          )}
                         </div>
+
                         <div className="mb-3">
                           <input
                             className="form-control form-control-user  shadow-none "
                             type="email"
                             placeholder="Donnez votre email.."
                             name="email"
+                            value={formData.email}
+                            onChange={handleChange}
                           />
+                          {errors.email && (
+                            <div className="text-danger">{errors.email}</div>
+                          )}
                         </div>
                         <div className="mb-3">
                           <input
@@ -58,14 +124,22 @@ export default function Register(props) {
                             type="tel"
                             placeholder="Donnez votre numéro téléphone.."
                             name="phone"
+                            value={formData.phone}
+                            onChange={handleChange}
                           />
+                          {errors.phone && (
+                            <div className="text-danger ">{errors.phone}</div>
+                          )}
                         </div>
+
                         <div className="mb-3">
                           <input
                             className="form-control form-control-user  shadow-none "
                             type="password"
                             placeholder="Mot de passe"
                             name="password"
+                            value={formData.password}
+                            onChange={handleChange}
                           />
                         </div>
                         <div className="mb-3">
@@ -74,31 +148,17 @@ export default function Register(props) {
                             type="password"
                             placeholder="Répétez votre mot de passe"
                             name="repeat_password"
+                            value={formData.repeat_password}
+                            onChange={handleChange}
                           />
                         </div>
-                        {/* <div className="mb-3">
-                          <div className="custom-control custom-checkbox small">
-                            <div className="form-check">
-                              <input
-                                className="form-check-input custom-control-input"
-                                type="checkbox"
-                                id="formCheck-1"
-                              />
-                              <label
-                                className="form-check-label custom-control-label"
-                                for="formCheck-1"
-                              >
-                                Remember Me
-                              </label>
-                            </div>
-                          </div>
-                        </div> */}
-                        <a
+
+                        <button
                           className=" primary-btn  d-block btn-user w-100 text-center"
                           type="submit"
                         >
                           Commencez votre experience
-                        </a>
+                        </button>
 
                         <hr />
                       </form>

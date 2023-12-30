@@ -1,6 +1,21 @@
 import OwlCarousel from "react-owl-carousel";
 import CarCard from "./CarCard";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { AUTH_TOKEN, AUTH_USER, URL } from "../../constants";
 export default function CarsMenu(props) {
+  const user = AUTH_TOKEN && AUTH_USER;
+  const [cars, setCars] = useState([]);
+  useEffect(() => {
+    const link = `${URL}/cars`;
+
+    axios
+      .get(link)
+      .then((res) => {
+        setCars(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
   return (
     <>
       <section class="car spad bg-light rounded m-4 mb-2">
@@ -64,12 +79,13 @@ export default function CarsMenu(props) {
             </div>
             <div class="col-lg-9">
               <div class="row">
-                <CarCard />
-                <CarCard />
-                <CarCard />
-                <CarCard />
-                <CarCard />
-                <CarCard />
+                {cars && cars.length != 0 ? (
+                  cars.map((car, index) => {
+                    return <CarCard key={index} car={car} />;
+                  })
+                ) : (
+                  <>Aucune voiture poul la moment</>
+                )}
               </div>
               <div class="pagination__option">
                 <a href="#" class="active">

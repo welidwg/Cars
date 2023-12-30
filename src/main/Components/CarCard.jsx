@@ -1,13 +1,16 @@
 import OwlCarousel from "react-owl-carousel";
 import { NavLink } from "react-router-dom";
+import { URL, URL_IMG } from "../../constants";
 
 export default function CarCard(props) {
+  const car = props.car;
   return (
     <>
-      <div class="col-lg-4 col-md-4">
-        <div class="car__item"></div>
+      <div className="col-lg-4 col-md-4">
+        <div className="car__item"></div>
         <OwlCarousel
-          class="car__item__pic__slider owl-carousel owl-theme "
+          className="car__item__pic__slider owl-carousel owl-theme bg-light "
+          style={{ minHeight: "200px", maxHeight: "200px" }}
           loop
           auto
           margin={10}
@@ -15,41 +18,50 @@ export default function CarCard(props) {
           nav={false}
           dots={false}
         >
-          <div className="item">
-            {" "}
-            <img src="img/cars/car-3.jpg" alt="" />
-          </div>
-          <div className="item">
-            {" "}
-            <img src="img/cars/car-8.jpg" alt="" />
-          </div>
-          <div className="item">
-            {" "}
-            <img src="img/cars/car-6.jpg" alt="" />
-          </div>
-          <div className="item">
-            <img src="img/cars/car-3.jpg" alt="" />
-          </div>
+          {car && car.photos.length != 0 ? (
+            car.photos.map((pic, i) => {
+              return (
+                <div className="item" key={i}>
+                  {" "}
+                  <img
+                    className=""
+                    style={{ height: "200px" }}
+                    src={`${URL_IMG}/${pic}`}
+                    alt={pic}
+                  />
+                </div>
+              );
+            })
+          ) : (
+            <></>
+          )}
         </OwlCarousel>
-        <div class="car__item__text">
-          <div class="car__item__text__inner">
-            <div class="label-date ">2018</div>
-            <h5>
-              <a href="#">Audi q8 2020</a>
+        <div className="car__item__text">
+          <div className="car__item__text__inner">
+            <div className="label-date ">{car.year}</div>
+            <h5 className="">
+              <a href="#" className="text-center mx-auto ms-auto">
+                {car.brand} | {car.model}
+              </a>
             </h5>
-            <ul>
-              <li>
-                <span>35,000</span> kms
-              </li>
-              <li>Auto</li>
-              <li>
-                <span>Diesel</span>
-              </li>
-            </ul>
+            <div className="d-flex flex-column text-dark">
+              <span>
+                <span className="fw-bold text-secondary">Kilométrage :</span>
+                {car.kms} Kms
+              </span>
+              <span>
+                <span className="fw-bold text-secondary">Boite : </span>
+                {car.boite}
+              </span>{" "}
+              <span>
+                <span className="fw-bold text-secondary">Energie : </span>
+                {car.energie}
+              </span>{" "}
+            </div>
           </div>
-          <div class=" d-flex justify-content-between align-items-center">
-            <span class="car-option bg-dark">20000 dt</span>
-            <NavLink to={"/car/detail"} className="btn text-dark ">
+          <div className=" d-flex justify-content-between align-items-center">
+            <span className="car-option bg-dark">{car.price} dt</span>
+            <NavLink to={"/car/detail/" + car.id} className="btn text-dark ">
               <i className="fas fa-arrow-right"></i>
             </NavLink>
           </div>

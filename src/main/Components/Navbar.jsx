@@ -3,8 +3,10 @@ import Logo from "../../assets/5.png";
 import $ from "jquery";
 import { useEffect } from "react";
 import ModalWrapper from "./ModalWrapper";
+import { AUTH_TOKEN, AUTH_USER } from "../../constants";
 
 export default function Navbar(props) {
+  const user = AUTH_TOKEN && AUTH_USER;
   useEffect(() => {
     $(".canvas__open").on("click", function () {
       $(".offcanvas-menu-wrapper").addClass("active");
@@ -45,10 +47,12 @@ export default function Navbar(props) {
             </div>
             <div className="col-lg-5">
               <div className="header__top__right">
-                <div className="header__top__phone">
-                  <i className="fas fa-phone"></i>
-                  <span>(+12) 345 678 910</span>
-                </div>
+                {user && (
+                  <div className="header__top__phone">
+                    {user && user.username} |{" "}
+                    {user && user.role == 0 ? "ADMIN" : "USER"}
+                  </div>
+                )}
                 <div className="header__top__social">
                   <a href="#">
                     <i className="fab fa-facebook"></i>
@@ -88,9 +92,11 @@ export default function Navbar(props) {
                   <li>
                     <a href="./car.html">Voitures</a>
                   </li>
-                  <li>
-                    <NavLink to={"/dash/cars"}>Mon espace</NavLink>
-                  </li>
+                  {user && (
+                    <li>
+                      <NavLink to={"/dash/cars"}>Mon espace</NavLink>
+                    </li>
+                  )}
                 </ul>
               </nav>
               <div className="header__nav__widget">
@@ -102,9 +108,24 @@ export default function Navbar(props) {
                     <i className="fas fa-search"></i>
                   </a>
                 </div>
-                <NavLink to={"/login"} className="primary-btn">
-                  Connexion
-                </NavLink>
+                {user ? (
+                  <>
+                    <a
+                      className="primary-btn"
+                      onClick={() => {
+                        localStorage.removeItem("token");
+                        localStorage.removeItem("user");
+                        window.location.href = "/";
+                      }}
+                    >
+                      Déconnexion
+                    </a>
+                  </>
+                ) : (
+                  <NavLink to={"/login"} className="primary-btn">
+                    Connexion
+                  </NavLink>
+                )}
               </div>
             </div>
           </div>

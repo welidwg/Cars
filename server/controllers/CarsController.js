@@ -3,7 +3,13 @@ import Car from "../models/Car.js";
 
 export const createCar = async (req, res) => {
   try {
-    const newCar = await Car.create(req.body);
+    const filenames = req.files.map((file) => file.filename);
+    req.body.price = parseFloat(req.body.price);
+    req.body.kms = parseFloat(req.body.kms);
+    req.body.owner_id = parseInt(req.body.owner_id);
+    const data = req.body;
+    data.photos = filenames;
+    const newCar = await Car.create(data);
     res.json(newCar);
   } catch (error) {
     console.error("Error creating car:", error);
@@ -24,7 +30,27 @@ export const getCarById = async (req, res) => {
   const carId = req.params.id;
 
   try {
-    const car = await Car.findByPk(carId);
+    const car = await Car.findByPk(carId, {
+      include: [{ model: User, as: "owner" }],
+    });
+    if (car) {
+      res.json(car);
+    } else {
+      res.status(404).json({ error: "Car not found" });
+    }
+  } catch (error) {
+    console.error("Error getting car by ID:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+export const getCarByOwnerId = async (req, res) => {
+  const ownerId = req.params.id;
+
+  try {
+    const car = await Car.findAll({
+      where: { owner_id: ownerId },
+      include: [{ model: User, as: "owner" }],
+    });
     if (car) {
       res.json(car);
     } else {

@@ -17,7 +17,9 @@ import CarsPage from "./main/Pages/dashboard/CarsPage";
 import Profile from "./main/Pages/dashboard/Profile";
 import AddCarPage from "./main/Pages/dashboard/AddCarPage";
 import CarDetails from "./main/Pages/CarDetails";
+import UsersList from "./main/Pages/dashboard/UsersList";
 function App() {
+  const [updateView, setUpdateView] = useState(false);
   useEffect(() => {
     $(".loader").fadeOut();
     $("#preloder").delay(200).fadeOut("slow");
@@ -36,7 +38,7 @@ function App() {
       // });
       Aos.init();
     });
-  }, []);
+  }, [updateView]);
 
   return (
     <>
@@ -46,10 +48,14 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/car/detail" element={<CarDetails />} />
+          <Route path="/car/detail/:id" element={<CarDetails />} />
           <Route path="/dash/index" element={<IndexDashboard />} />
           <Route path="/dash/cars" element={<CarsPage />} />
-          <Route path="/dash/profile" element={<Profile />} />
+          <Route
+            path="/dash/profile"
+            element={<Profile onUpdate={setUpdateView} />}
+          />
+          <Route path="/dash/users" element={<UsersList />} />
           <Route path="/dash/cars/new" element={<AddCarPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

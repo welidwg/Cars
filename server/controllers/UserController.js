@@ -15,8 +15,8 @@ export const loginUser = async (req, res) => {
 
     if (!user) {
       return res
-        .status(401)
-        .json({ error: "Authentication failed: User not found" });
+        .status(404)
+        .json({ error: "L'email ou le mot de passe sont non valides" });
     }
 
     bcrypt.compare(password, user.dataValues.password, (err, result) => {
@@ -26,11 +26,11 @@ export const loginUser = async (req, res) => {
         const token = jwt.sign({ id: user.dataValues.id }, JWT_SECRET, {
           expiresIn: "2h",
         });
-        return res.json({ token });
+        return res.json({ token: token, user: user.dataValues });
       } else {
         return res
           .status(401)
-          .json({ error: "Authentication failed: Invalid password" });
+          .json({ error: "L'email ou le mot de passe sont non valides" });
       }
     });
   } catch (error) {
@@ -76,6 +76,9 @@ export const updateUser = async (userId, updatedData) => {
   try {
     const user = await User.findByPk(userId);
     if (user) {
+      if (updatedData.newPass !== "") {
+        updatedData.password = bcrypt.hashSync(updatedData.newPass, salt);
+      }
       await user.update(updatedData);
       return user;
     } else {
