@@ -1,11 +1,13 @@
 import axios from "axios";
 import { useParams } from "react-router";
-import { URL, URL_IMG } from "../../constants";
+import { AUTH_TOKEN, AUTH_USER, URL, URL_IMG } from "../../constants";
 import { useEffect, useState } from "react";
 import OwlCarousel from "react-owl-carousel";
+import { NavLink } from "react-router-dom";
 
 export default function CarDetails(props) {
   const [car, setCar] = useState(null);
+  const user = AUTH_TOKEN && AUTH_USER;
   const params = useParams();
   useEffect(() => {
     const id = params.id;
@@ -28,30 +30,29 @@ export default function CarDetails(props) {
           </div>
         </div>
       </div>
-      <section className="car-details spad bg-dark">
+      <section className="car-details  bg-dark p-4 m-4">
         <div className="container">
           <div className="row">
-            <div className="col-lg-9 :">
+            <div className="col-lg-9 ">
               <div className="car__details__pic">
                 <div className="car__details__pic__large">
                   <OwlCarousel
-                    className="car__item__pic__slider owl-carousel owl-theme bg-light "
-                    loop
+                    className="car__item__pic__slider owl-carousel owl-theme shadow"
                     auto
-                    style={{ height: "500px" }}
-                    margin={10}
+                    style={{ height: "570px" }}
+                    margin={0}
                     items={1}
                     nav={false}
                     dots={false}
                   >
-                    {car && car.photos.length != 0 ? (
+                    {car.photos instanceof Array ? (
                       car.photos.map((pic, i) => {
                         return (
                           <div className="item" key={i}>
                             {" "}
                             <img
                               className=""
-                              style={{ height: "500px" }}
+                              style={{ height: "570px" }}
                               src={`${URL_IMG}/${pic}`}
                               alt={pic}
                             />
@@ -59,90 +60,79 @@ export default function CarDetails(props) {
                         );
                       })
                     ) : (
-                      <></>
+                      <>
+                        <img
+                          className=""
+                          style={{ height: "570px" }}
+                          src={`${URL_IMG}/${car.photos}`}
+                          alt={car.photos}
+                        />
+                      </>
                     )}
                   </OwlCarousel>
-                </div>
-                <div className="row">
-                  <div className="col-lg-6 col-md-6 ">
-                    <div className="car__details__tab__info__item  ">
-                      <h5 className=" text-light">Informations générales</h5>
-                      <ul className="">
-                        <li className=" text-light ">
-                          <i className="fa fa-check"></i>{" "}
-                          <span className="fw-bold  color-1">Marque : </span>
-                          {car.brand}
-                        </li>
-                        <li className=" text-light ">
-                          <i className="fa fa-check"></i>
-                          <span className="fw-bold color-1">Modèle :</span>
-                          {car.model}
-                        </li>
-                        <li className=" text-light ">
-                          <i className="fa fa-check"></i>
-                          <span className="fw-bold color-1">Kilométrage :</span>
-                          {car.kms} Kms
-                        </li>
-                        <li className=" text-light ">
-                          <i className="fa fa-check"></i>
-                          <span className="fw-bold color-1">Energie :</span>
-                          {car.energie}
-                        </li>
-                        <li className=" text-light ">
-                          <i className="fa fa-check"></i>
-                          <span className="fw-bold color-1">Boite :</span>
-                          {car.boite}
-                        </li>
-                        <li className=" text-light ">
-                          <i className="fa fa-check"></i>
-                          <span className="fw-bold color-1">Année :</span>
-                          {car.year}
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div className="col-lg-6 col-md-6 ">
-                    <div className="car__details__tab__info__item  ">
-                      <h5 className=" text-light">
-                        Informations du propriétaire
-                      </h5>
-                      <ul className="">
-                        <li className=" text-light ">
-                          <i className="fa fa-check"></i>{" "}
-                          <span className="fw-bold  color-1">Nom : &nbsp;</span>
-                          {car.owner.username}
-                        </li>
-                        <li className=" text-light ">
-                          <i className="fa fa-check"></i>
-                          <span className="fw-bold color-1">Mobile :</span>
-                          {car.owner.phone}
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
             <div className="col-lg-3">
               <div className="car__details__sidebar">
                 <div className="car__details__sidebar__model">
-                  <p>Pricing in 11/26/2019</p>
+                  <h4 className="text-center">Fiche technique</h4>
+                  <hr />
                 </div>
                 <div className="car__details__sidebar__payment">
                   <ul>
                     <li>
-                      Prix actuel <span>{car.price} TND</span>
+                      Marque <span>{car.brand}</span>
                     </li>
                     <li>
-                      Prix estimé <span>{car.price} TND</span>
+                      Model <span>{car.model}</span>
                     </li>
+                    <li>
+                      kilométrage <span>{car.kms} Kms</span>
+                    </li>
+                    <li>
+                      Energie <span>{car.energie}</span>
+                    </li>
+                    <li>
+                      Boite vitesse <span>{car.boite} </span>
+                    </li>
+                    <li>
+                      Année <span>{car.year}</span>
+                    </li>
+                    <li>
+                      Proprétaire <span>{car.owner.username}</span>
+                    </li>
+                    <li>
+                      Prix actuel <span>{car.price} TND</span>
+                    </li>
+                    {user && user.id !== car.owner.id ? (
+                      <li>
+                        Prix estimé <span>{car.price} TND</span>
+                      </li>
+                    ) : (
+                      <></>
+                    )}
                   </ul>
-                  <a href="#" className="primary-btn">
-                    <i className="fas fa-phone"></i> Contactez le propriétaire
-                  </a>
-                  <a href="#" className="primary-btn n">
-                    <i class="fas fa-exclamation"></i> Rapporter
-                  </a>
+                  {user && user.id !== car.owner.id ? (
+                    <>
+                      <a href="#" className="primary-btn">
+                        <i className="fas fa-phone"></i> Contactez le
+                        propriétaire
+                      </a>
+                      <a href="#" className="primary-btn n">
+                        <i class="fas fa-exclamation"></i> Rapporter
+                      </a>
+                    </>
+                  ) : (
+                    <>
+                      <NavLink
+                        to={`/dash/cars/${car.id}/edit`}
+                        className="primary-btn"
+                      >
+                        <i class="fas fa-pencil-alt"></i>Modifier
+                      </NavLink>
+                    </>
+                  )}
                 </div>
               </div>
             </div>

@@ -71,13 +71,13 @@ export default function Profile(props) {
           <form className="user" onSubmit={handleSubmit}>
             <div className="mb-3 d-flex align-items-center">
               <div className="col-2">
-                <label className="text-dark fw-bold">Username: </label>
+                <label className="text-dark fw-bold">Nom: </label>
               </div>
               <div className="w-100">
                 <input
                   className="form-control form-control-user  shadow-none "
                   type="text"
-                  placeholder="Enter your username..."
+                  placeholder="Saisissez votre nom..."
                   defaultValue={newUser.username}
                   name="username"
                   onChange={handleChange}
@@ -95,7 +95,7 @@ export default function Profile(props) {
                 <input
                   className="form-control form-control-user  shadow-none "
                   type="email"
-                  placeholder="Enter Email Address..."
+                  placeholder="Saisissez votre Email..."
                   defaultValue={newUser.email}
                   name="email"
                   onChange={handleChange}
@@ -107,12 +107,12 @@ export default function Profile(props) {
             </div>
             <div className="mb-3 d-flex align-items-center">
               <div className="col-2">
-                <label className="text-dark fw-bold ">Phone: </label>
+                <label className="text-dark fw-bold ">Téléphone: </label>
               </div>
               <input
                 className="form-control form-control-user  shadow-none "
                 type="tel"
-                placeholder="Enter your phone..."
+                placeholder="Saisissez votre téléphone..."
                 defaultValue={newUser.phone}
                 name="phone"
                 onChange={handleChange}
@@ -120,12 +120,14 @@ export default function Profile(props) {
             </div>
             <div className="mb-3 d-flex align-items-center">
               <div className="col-2">
-                <label className="text-dark fw-bold ">New password: </label>
+                <label className="text-dark fw-bold ">
+                  Nouveau mot de passe :{" "}
+                </label>
               </div>
               <input
                 className="form-control form-control-user  shadow-none "
                 type="password"
-                placeholder="Change your password here"
+                placeholder="Saisissez votre nouveau mot de passe ici"
                 name="newPass"
                 onChange={handleChange}
               />
@@ -135,7 +137,7 @@ export default function Profile(props) {
               className="btn primary-btn mt-4 btn-user w-100 text-center"
               type="submit"
             >
-              Save
+              Enregistrer
             </button>
 
             <hr />

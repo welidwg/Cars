@@ -3,6 +3,7 @@ import Wrapper from "../Layouts/Wrapper";
 import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { URL } from "../../constants";
 
 export default function LoginPage(props) {
   const [loginData, setLoginData] = useState({
@@ -20,7 +21,7 @@ export default function LoginPage(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:5000/api/users/login", loginData)
+      .post(URL + "/users/login", loginData)
       .then((res) => {
         toast.success("Bien connecté", { autoClose: 1000 });
         localStorage.setItem("token", res.data.token);

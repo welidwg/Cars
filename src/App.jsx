@@ -18,6 +18,8 @@ import Profile from "./main/Pages/dashboard/Profile";
 import AddCarPage from "./main/Pages/dashboard/AddCarPage";
 import CarDetails from "./main/Pages/CarDetails";
 import UsersList from "./main/Pages/dashboard/UsersList";
+import EditCarPage from "./main/Pages/dashboard/EditCarPage";
+
 function App() {
   const [updateView, setUpdateView] = useState(false);
   useEffect(() => {
@@ -57,6 +59,7 @@ function App() {
           />
           <Route path="/dash/users" element={<UsersList />} />
           <Route path="/dash/cars/new" element={<AddCarPage />} />
+          <Route path="/dash/cars/:id/edit" element={<EditCarPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Wrapper>

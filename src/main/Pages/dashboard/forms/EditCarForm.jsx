@@ -1,35 +1,37 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
 import { AUTH_TOKEN, AUTH_USER, URL } from "../../../../constants";
 import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
 
-export default function AddCarForm(props) {
+export default function EditCarForm(props) {
   const user = AUTH_TOKEN && AUTH_USER;
-  const [formDt, setFormData] = useState({
-    owner_id: user.id,
-    brand: "",
-    model: "",
-    price: "",
-    kms: 0,
-    energie: "Essence",
-    boite: "Manuelle",
-    year: null,
-    photos: [],
-  });
+  const [formDt, setFormData] = useState(null);
   const [suggestions, setSuggestions] = useState([]);
   const handleChange = (e) => {
     const { name, value, type } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]:
-        type === "file"
-          ? e.target.files
-          : name == "kms"
-          ? parseInt(value)
-          : value,
+      [name]: type === "file" ? e.target.files : value,
     }));
   };
-
+  useEffect(() => {
+    if (props.car != null) {
+      setFormData({
+        id: props.car.id,
+        owner_id: user.id,
+        brand: props.car.brand,
+        model: props.car.model,
+        price: props.car.price,
+        kms: props.car.kms,
+        energie: props.car.energie,
+        boite: props.car.boite,
+        year: props.car.year,
+        photos: props.car.photos,
+        newPhotos: [],
+        removePhotos: [],
+      });
+    }
+  }, [props.car]);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -38,55 +40,36 @@ export default function AddCarForm(props) {
       for (const key in formDt) {
         if (formDt.hasOwnProperty(key)) {
           const value = formDt[key];
-          if (key === "photos" && value instanceof FileList) {
+          if (key === "newPhotos" && value instanceof FileList) {
             for (let i = 0; i < value.length; i++) {
               formData.append(key, value[i]);
             }
           } else {
-            if (key === "kms") {
-              formData.append(key, parseFloat(value));
-              console.log("====================================");
-              console.log(parseFloat(value));
-              console.log("====================================");
-            } else if (key === "price") {
-              formData.append(key, parseFloat(value));
-            } else {
-              formData.append(key, value);
-            }
+            formData.append(key, value);
           }
         }
       }
       await axios
-        .post(URL + "/cars", formData, {
+        .put(URL + "/cars/" + formDt.id, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
         })
         .then((res) => {
-          e.target.reset();
-          toast.success("Voiture bien ajoutée");
-          setFormData({
-            owner_id: user.id,
-            brand: "",
-            model: "",
-            price: "",
-            kms: 0,
-            energie: "Essence",
-            boite: "Manuelle",
-            year: "",
-            photos: [],
-          });
+          toast.success("Voiture bien modifié");
+          console.log(res.data);
         })
         .catch((err) => {
-          console.log(err);
+          console.log(err.response);
         });
     } catch (error) {
       console.error("An error occurred while processing the request:", error);
     }
   };
 
-
-  return (
+  return formDt == null ? (
+    <>loading</>
+  ) : (
     <>
       <form className="user" onSubmit={handleSubmit}>
         <input type="hidden" name="owner_id" defaultValue={user.id} />
@@ -102,6 +85,7 @@ export default function AddCarForm(props) {
               name="brand"
               required
               onChange={handleChange}
+              defaultValue={formDt.brand}
             />
             {/* <ul>
               {suggestions.map((suggest, index) => (
@@ -121,6 +105,7 @@ export default function AddCarForm(props) {
             name="model"
             required
             onChange={handleChange}
+            defaultValue={formDt.model}
           />
         </div>
         <div className="mb-3 d-flex align-items-center">
@@ -134,6 +119,7 @@ export default function AddCarForm(props) {
             placeholder="example : 15000"
             name="price"
             onChange={handleChange}
+            defaultValue={formDt.price}
           />
         </div>
         <div className="mb-3 d-flex align-items-center">
@@ -146,6 +132,7 @@ export default function AddCarForm(props) {
             placeholder="example : 20000 "
             name="kms"
             required
+            defaultValue={formDt.kms}
             onChange={handleChange}
           />
         </div>
@@ -158,6 +145,7 @@ export default function AddCarForm(props) {
             className="form-select form-control-user  shadow-none"
             name="energie"
             onChange={handleChange}
+            defaultValue={formDt.energie}
           >
             <option value={"Essence"}>Essence</option>
             <option value="Diesel">Diesel</option>
@@ -172,6 +160,7 @@ export default function AddCarForm(props) {
             className="form-select form-control-user  shadow-none"
             name="boite"
             onChange={handleChange}
+            defaultValue={formDt.boite}
           >
             <option value={"Manuelle"}>Manuelle</option>
             <option value="Automatique">Automatique</option>
@@ -187,26 +176,27 @@ export default function AddCarForm(props) {
             min={1950}
             required
             max={2024}
+            defaultValue={formDt.year}
             placeholder="example : 2020 "
             name="year"
             onChange={handleChange}
           />
         </div>
-        <div className="mb-3 d-flex align-items-center">
+        {/* <div className="mb-3 d-flex align-items-center">
           <div className="col-2">
-            <label className="text-dark fw-bold">Images: </label>
+            <label className="text-dark fw-bold">Ajouter des Images: </label>
           </div>
           <input
             className="form-control form-control-user  shadow-none "
             type="file"
             multiple
-            name="photos"
+            name="newPhotos"
             onChange={handleChange}
           />
-        </div>
+        </div> */}
 
         <button className=" primary-btn  btn  w-100 text-center" type="submit">
-          Ajouter
+          Enregistrer
         </button>
 
         <hr />

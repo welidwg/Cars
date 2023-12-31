@@ -11,20 +11,19 @@ export default function CarCard(props) {
         <OwlCarousel
           className="car__item__pic__slider owl-carousel owl-theme bg-light "
           style={{ minHeight: "200px", maxHeight: "200px" }}
-          loop
-          auto
           margin={10}
           items={1}
           nav={false}
           dots={false}
         >
-          {car && car.photos.length != 0 ? (
+          {car.photos instanceof Array ? (
             car.photos.map((pic, i) => {
               return (
                 <div className="item" key={i}>
                   {" "}
                   <img
                     className=""
+                    key={i + 1}
                     style={{ height: "200px" }}
                     src={`${URL_IMG}/${pic}`}
                     alt={pic}
@@ -33,7 +32,14 @@ export default function CarCard(props) {
               );
             })
           ) : (
-            <></>
+            <>
+              <img
+                className=""
+                style={{ height: "200px" }}
+                src={`${URL_IMG}/${car.photos}`}
+                alt={car.photos}
+              />
+            </>
           )}
         </OwlCarousel>
         <div className="car__item__text">

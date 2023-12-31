@@ -9,6 +9,7 @@ import { ToastContainer } from "react-toastify";
 const styles = import("../../assets/style.css");
 const style1 = import("../../indexx.css");
 import "react-toastify/dist/ReactToastify.css";
+import "mdb-react-ui-kit/dist/css/mdb.min.css";
 
 export default function Wrapper(props) {
   const [isDash, setIsDash] = useState(false);
@@ -65,10 +66,10 @@ export default function Wrapper(props) {
       {!isDashb && (
         <>
           <Footer />
-          <div class="search-model">
-            <div class="h-100 d-flex align-items-center justify-content-center">
-              <div class="search-close-switch">+</div>
-              <form class="search-model-form">
+          <div className="search-model">
+            <div className="h-100 d-flex align-items-center justify-content-center">
+              <div className="search-close-switch">+</div>
+              <form className="search-model-form">
                 <input
                   type="text"
                   id="search-input"

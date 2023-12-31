@@ -5,96 +5,133 @@ import axios from "axios";
 import { AUTH_TOKEN, AUTH_USER, URL } from "../../constants";
 export default function CarsMenu(props) {
   const user = AUTH_TOKEN && AUTH_USER;
+  const [searchParams, setSearchParams] = useState({
+    brand: "",
+    model: "",
+    boite: "",
+    kms: "",
+    energie: "",
+  });
+  const handleFilter = (e) => {
+    const { name, value } = e.target;
+    setSearchParams((prevParams) => ({ ...prevParams, [name]: value }));
+  };
   const [cars, setCars] = useState([]);
   useEffect(() => {
     const link = `${URL}/cars`;
 
     axios
-      .get(link)
+      .get(link, { params: searchParams })
       .then((res) => {
         setCars(res.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+    console.log(searchParams);
+  }, [searchParams]);
+
   return (
     <>
-      <section class="car spad bg-light rounded m-4 mb-2">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-3">
-              <div class="car__sidebar">
-                <div class="car__search">
-                  <h5>Recherche</h5>
-                  <form action="#">
-                    <input type="text" placeholder="..." />
-                    <button type="submit">
-                      <i class="fa fa-search"></i>
-                    </button>
-                  </form>
-                </div>
-                <div class="car__filter">
+      <section className="car spad bg-light rounded m-4 mb-2">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-3">
+              <div className="car__sidebar">
+                <div className="car__filter">
                   <h5>Filtre</h5>
                   <form action="#">
-                    <select className="form-select mb-3">
-                      <option data-display="Brand">Marque</option>
-                      <option value="">Acura</option>
-                      <option value="">Audi</option>
-                      <option value="">Bentley</option>
-                      <option value="">BMW</option>
-                      <option value="">Bugatti</option>
-                    </select>
-                    <select className="form-select mb-3">
-                      <option data-display="Model">Modèle</option>
-                      <option value="">Q3</option>
-                      <option value="">A4 </option>
-                      <option value="">AVENTADOR</option>
-                    </select>
+                    <div className="mb-3">
+                      <input
+                        type="text"
+                        className="form-control shadow-none"
+                        placeholder="Marque"
+                        name="brand"
+                        defaultValue={searchParams.brand}
+                        onChange={handleFilter}
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <input
+                        type="text"
+                        className="form-control shadow-none"
+                        placeholder="Modèle"
+                        name="model"
+                        defaultValue={searchParams.model}
+                        onChange={handleFilter}
+                      />
+                    </div>
 
-                    <select className="form-select mb-3">
-                      <option value="">Kilométrages</option>
-                      <option value="">27</option>
-                      <option value="">20</option>
-                      <option value="">15</option>
-                      <option value="">10</option>
-                    </select>
-                    <select className="form-select mb-3">
+                    <div className="mb-3">
+                      <input
+                        type="number"
+                        min={0}
+                        className="form-control shadow-none"
+                        placeholder="Kilométrage"
+                        name="kms"
+                        defaultValue={searchParams.kms}
+                        onChange={handleFilter}
+                      />
+                    </div>
+                    <select
+                      className="form-select mb-3"
+                      defaultValue={searchParams.engine}
+                      onChange={handleFilter}
+                      name="energie"
+                    >
                       <option value="">Engine</option>
                       <option value="Essence">Essence</option>
                       <option value="Diesel">Diesel</option>
                     </select>
-                    <select className="form-select mb-3">
+                    <select
+                      className="form-select mb-3"
+                      defaultValue={searchParams.boite}
+                      onChange={handleFilter}
+                      name="boite"
+                    >
                       <option value="">Boite</option>
-                      <option value="">Manuelle</option>
-                      <option value="">Automatique</option>
+                      <option value="Manuelle">Manuelle</option>
+                      <option value="Automatique">Automatique</option>
                     </select>
 
-                    <div class="car__filter__btn mt-2">
-                      <button type="submit" class="site-btn">
+                    <div className="car__filter__btn mt-2">
+                      <a
+                        className="site-btn"
+                        onClick={() => {
+                          setSearchParams({
+                            brand: "",
+                            model: "",
+                            boite: "",
+                            kms: "",
+                            energie: "",
+                          });
+                        }}
+                      >
                         Restorer le filtre
-                      </button>
+                      </a>
                     </div>
                   </form>
                 </div>
               </div>
             </div>
-            <div class="col-lg-9">
-              <div class="row">
+            <div className="col-lg-9">
+              <div className="row">
                 {cars && cars.length != 0 ? (
                   cars.map((car, index) => {
-                    return <CarCard key={index} car={car} />;
+                    return <CarCard key={index + 434343} car={car} />;
                   })
                 ) : (
-                  <>Aucune voiture poul la moment</>
+                  <span className="text-dark">
+                    Aucune voiture poul la moment
+                  </span>
                 )}
               </div>
-              <div class="pagination__option">
-                <a href="#" class="active">
+              <div className="pagination__option">
+                <a href="#" className="active">
                   1
                 </a>
                 <a href="#">2</a>
                 <a href="#">3</a>
                 <a href="#">
-                  <span class="arrow_carrot-2right"></span>
+                  <span className="arrow_carrot-2right"></span>
                 </a>
               </div>
             </div>

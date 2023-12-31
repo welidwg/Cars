@@ -15,12 +15,12 @@ export default function Header(props) {
                 </div>
 
                 <NavLink to={"/register"} href="#" className="primary-btn">
-                  <i class="fa fa-user-plus" aria-hidden="true"></i> Créer un
-                  compte
+                  <i className="fa fa-user-plus" aria-hidden="true"></i> Créer
+                  un compte
                 </NavLink>
                 <a href="#" className="primary-btn more-btn">
-                  <i class="fa fa-question-circle" aria-hidden="true"></i> En
-                  savoir plus
+                  <i className="fa fa-question-circle" aria-hidden="true"></i>{" "}
+                  En savoir plus
                 </a>
               </div>
             </div>

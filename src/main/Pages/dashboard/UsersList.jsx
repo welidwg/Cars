@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { URL } from "../../../constants";
 import moment from "moment";
+import DataTable from "react-data-table-component";
 
 export default function UsersList(props) {
   const [users, setUsers] = useState([]);
@@ -31,49 +32,51 @@ export default function UsersList(props) {
           Liste des utilisateurs
         </div>
         <div className="card-body">
-          <div className="table-responsive rounded">
-            <table className="table table-white ">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Nom d'utilisateur</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Mobile</th>
-                  <th scope="col">Date de creation</th>
-                  <th scope="col">Type</th>
-                  <th scope="col">Voitures</th>
-                  <th scope="col">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {users &&
-                  users.length != 0 &&
-                  users.map((user, index) => {
-                    return (
-                      <tr className="" key={index}>
-                        <td scope="row">{index + 1}</td>
-                        <td>{user.username}</td>
-                        <td>{user.email}</td>
-                        <td>{user.phone}</td>
-                        <td>{moment(user.createdAt).format("d-MMM-Y")}</td>
-                        <td className="">
-                          <span className="">
-                            {user.role == 0 ? "Admin" : "User"}
-                          </span>
-                        </td>
-                        <td>2020</td>
-                        <td>
-                          <a className="primary-btn rounded">
-                            {" "}
-                            <i className="fa fa-trash" aria-hidden="true"></i>
-                          </a>
-                        </td>
-                      </tr>
-                    );
-                  })}
-              </tbody>
-            </table>
-          </div>
+          <DataTable
+            data={users}
+            pagination
+            columns={[
+              {
+                name: "Username",
+                selector: (row) => row.username,
+                sortable: true,
+              },
+              {
+                name: "Email",
+                selector: (row) => row.email,
+              },
+              {
+                name: "Mobile",
+                selector: (row) => row.phone,
+              },
+              {
+                name: "Date de création",
+                sortable: true,
+                selector: (row) => moment(row.createdAt).format("d-MMM-Y"),
+              },
+              {
+                name: "Type",
+                sortable: true,
+                selector: (row) => (row.role == 0 ? "Admin" : "User"),
+              },
+              {
+                name: "Voitures",
+                selector: (row) => row.cars.length,
+              },
+              {
+                name: "Action",
+                cell: (row) => {
+                  return (
+                    <>
+                      <a className=" shadow-sm text-danger rounded btn p-1">
+                        <i className="fa fa-trash" aria-hidden="true"></i>
+                      </a>
+                    </>
+                  );
+                },
+              },
+            ]}
+          />
         </div>
       </div>
     </WrapperDash>

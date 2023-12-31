@@ -26,7 +26,7 @@ carRouter.post("/cars", upload.array("photos", 5), createCar);
 carRouter.get("/cars", getAllCars);
 carRouter.get("/cars/:id", getCarById);
 carRouter.get("/cars/owner/:id", getCarByOwnerId);
-carRouter.put("/cars/:id", updateCarById);
+carRouter.put("/cars/:id", upload.array("photos", 5), updateCarById);
 carRouter.delete("/cars/:id", deleteCarById);
 
 export default carRouter;

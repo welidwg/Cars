@@ -3,25 +3,25 @@ import { AUTH_TOKEN, AUTH_USER } from "../../../../constants";
 
 export default function NavbarDash(props) {
   const user = AUTH_TOKEN && AUTH_USER;
-  
+
   return (
     <nav className="navbar navbar-expand bg-color-1 rounded-pill navbar-light sticky-top px-4 py-0 nav-dash">
       <NavLink to="/" className=" flex-shrink-0">
         <i className="fal fa-arrow-left text-dark"></i>
       </NavLink>
-      <div className="mx-auto d-flex align-items-center">
+      <div className="mx-auto d-flex align-items-center justify-content-between">
         <NavLink to="/dash/cars" className="nav-link link-nav">
-          Vos Voitures
+          <i className="fas fa-cars"></i> Vos Voitures
         </NavLink>
         {user && user.role == 0 ? (
           <NavLink to="/dash/users" className="nav-link link-nav">
-            Utilisateurs
+            <i className="fas fa-users"></i> Utilisateurs
           </NavLink>
         ) : (
           <></>
         )}
         <NavLink to="/dash/profile" className="nav-link link-nav">
-          Mon profile
+          <i className="fas fa-user"></i> Mon profile
         </NavLink>
       </div>
 

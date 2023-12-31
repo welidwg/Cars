@@ -5,11 +5,29 @@ import axios from "axios";
 import { AUTH_TOKEN, AUTH_USER, URL } from "../../../constants";
 import moment from "moment";
 import { toast } from "react-toastify";
+import DataTable from "react-data-table-component";
 
 export default function CarsPage(props) {
   const user = AUTH_TOKEN && AUTH_USER;
   const [cars, setCars] = useState([]);
+  const [updateView, setUpdateView] = useState(false);
+  const handleDelete = (id) => {
+    if (confirm("Vous êtes sûr ?")) {
+      axios
+        .delete(URL + "/cars/" + id)
+        .then((res) => {
+          setUpdateView(true);
+        })
+        .catch((err) => {
+          toast.error("Erreur du serveur");
+          console.log("====================================");
+          console.log(err.response);
+          console.log("====================================");
+        });
+    }
+  };
   useEffect(() => {
+    setUpdateView(false);
     const link =
       user.role == 1 ? `${URL}/cars/owner/${user.id}` : `${URL}/cars`;
     axios
@@ -21,7 +39,7 @@ export default function CarsPage(props) {
         }
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [updateView]);
   return (
     <WrapperDash>
       <div
@@ -36,57 +54,88 @@ export default function CarsPage(props) {
           </NavLink>
         </div>
         <div className="card-body">
-          <div className="table-responsive rounded">
-            <table className="table table-white ">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Brand</th>
-                  <th scope="col">Model</th>
-                  <th scope="col">Price</th>
-                  <th scope="col">Kilometres</th>
-                  <th scope="col">Energie</th>
-                  <th scope="col">Boite</th>
-                  <th scope="col">Year</th>
-                  <th scope="col">Date d'ajout</th>
-                  {user && user.role == 0 && <th scope="col">Propriétaire</th>}
-                  <th scope="col">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {cars.length != 0 &&
-                  cars.map((car, index) => {
-                    return (
-                      <tr className="" key={index}>
-                        <td scope="row">{index + 1}</td>
-                        <td>{car.brand}</td>
-                        <td>{car.model}</td>
-                        <td>{car.price}</td>
-                        <td>{car.kms}</td>
-                        <td>{car.energie}</td>
-                        <td>{car.boite}</td>
-                        <td>{car.year}</td>
-                        <td>{moment(car.createdAt).format("d MMM Y")}</td>
-                        {user && user.role == 0 && (
-                          <td>
-                            {car.owner.username == user.username
-                              ? "Vous"
-                              : car.owner.username}{" "}
-                            / {car.owner.phone}
-                          </td>
-                        )}
-                        <td>
-                          <a className="primary-btn rounded">
-                            {" "}
-                            <i className="fa fa-trash" aria-hidden="true"></i>
-                          </a>
-                        </td>
-                      </tr>
-                    );
-                  })}
-              </tbody>
-            </table>
-          </div>
+          <DataTable
+            data={cars}
+            pagination
+            columns={[
+              {
+                name: "Brand",
+                selector: "brand",
+                sortable: true,
+              },
+              {
+                name: "Model",
+                selector: "model",
+                sortable: true,
+              },
+              {
+                name: "Price",
+                selector: "price",
+                sortable: true,
+              },
+              {
+                name: "Kilometres",
+                selector: "kms",
+                sortable: true,
+              },
+              {
+                name: "Energie",
+                selector: "energie",
+                sortable: true,
+              },
+              {
+                name: "Boite",
+                selector: "boite",
+                sortable: true,
+              },
+              {
+                name: "Year",
+                selector: "year",
+                sortable: true,
+              },
+              {
+                name: "Date d'ajout",
+                selector: "createdAt",
+                sortable: true,
+                format: (row) => moment(row.createdAt).format("D MMM Y"),
+              },
+              user &&
+                user.role === 0 && {
+                  name: "Propriétaire",
+                  selector: "owner",
+                  sortable: true,
+                  cell: (row) => (
+                    <span>
+                      {row.owner.username === user.username
+                        ? "Vous"
+                        : row.owner.username}{" "}
+                      / {row.owner.phone}
+                    </span>
+                  ),
+                },
+              {
+                name: "Action",
+                cell: (row) => (
+                  <div className="d-flex align-items-center justify-content-center">
+                    {user.id === row.owner.id && (
+                      <NavLink
+                        to={`/dash/cars/${row.id}/edit`}
+                        className="btn btn-dark mx-2 bg-transparent text-dark border-0 shadow-0 p-0 rounded"
+                      >
+                        <i className="fa fa-pencil-alt" aria-hidden="true"></i>
+                      </NavLink>
+                    )}
+                    <button
+                      className="btn btn-dark bg-transparent text-danger border-0 shadow-0 p-0 rounded"
+                      onClick={() => handleDelete(row.id)}
+                    >
+                      <i className="fa fa-trash" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                ),
+              },
+            ]}
+          />
         </div>
       </div>
     </WrapperDash>
