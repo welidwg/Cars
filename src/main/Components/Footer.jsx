@@ -14,13 +14,9 @@ export default function Footer(params) {
               </div>
               <div className="col-lg-6 col-md-6">
                 <div className="footer__contact__option">
-                  <div className="option__item">
-                    <i className="fa fa-phone"></i>
-                    (+12) 345 678 910
-                  </div>
                   <div className="option__item email">
                     <i className="fa fa-envelope-o"></i>
-                    Colorlib@gmail.com
+                    AutoBot@gmail.com
                   </div>
                 </div>
               </div>

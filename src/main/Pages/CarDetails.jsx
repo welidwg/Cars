@@ -1,6 +1,12 @@
 import axios from "axios";
 import { useParams } from "react-router";
-import { AUTH_TOKEN, AUTH_USER, URL, URL_IMG } from "../../constants";
+import {
+  AUTH_TOKEN,
+  AUTH_USER,
+  URL,
+  URL_FLASK,
+  URL_IMG,
+} from "../../constants";
 import { useEffect, useState } from "react";
 import OwlCarousel from "react-owl-carousel";
 import { NavLink } from "react-router-dom";
@@ -8,10 +14,24 @@ import { NavLink } from "react-router-dom";
 export default function CarDetails(props) {
   const [car, setCar] = useState(null);
   const user = AUTH_TOKEN && AUTH_USER;
+  const [price, setPrice] = useState(0);
   const params = useParams();
   useEffect(() => {
     const id = params.id;
-    axios.get(`${URL}/cars/${id}`).then((res) => setCar(res.data));
+    axios.get(`${URL}/cars/${id}`).then((res) => {
+      setCar(res.data);
+      let car = res.data;
+      axios
+        .post(`${URL_FLASK}`, {
+          brand: car.brand,
+          model: car.model,
+          year: parseInt(car.year),
+          Kms: parseInt(car.kms),
+          energie: car.energie,
+          gear: car.boite,
+        })
+        .then((res) => setPrice(res.data));
+    });
   }, []);
   return car == null ? (
     <>Loading</>
@@ -105,13 +125,17 @@ export default function CarDetails(props) {
                     <li>
                       Prix actuel <span>{car.price} TND</span>
                     </li>
-                    {user && user.id !== car.owner.id ? (
-                      <li>
-                        Prix estimé <span>{car.price} TND</span>
-                      </li>
-                    ) : (
-                      <></>
-                    )}
+
+                    <li>
+                      Prix estimé{" "}
+                      <span>
+                        {price != 0 ? (
+                          parseFloat(price).toFixed(0) + " TND"
+                        ) : (
+                          <span className="fs-6">Non diponible</span>
+                        )}
+                      </span>
+                    </li>
                   </ul>
                   {user && user.id !== car.owner.id ? (
                     <>
@@ -124,14 +148,16 @@ export default function CarDetails(props) {
                       </a>
                     </>
                   ) : (
-                    <>
-                      <NavLink
-                        to={`/dash/cars/${car.id}/edit`}
-                        className="primary-btn"
-                      >
-                        <i class="fas fa-pencil-alt"></i>Modifier
-                      </NavLink>
-                    </>
+                    AUTH_TOKEN && (
+                      <>
+                        <NavLink
+                          to={`/dash/cars/${car.id}/edit`}
+                          className="primary-btn"
+                        >
+                          <i class="fas fa-pencil-alt"></i>Modifier
+                        </NavLink>
+                      </>
+                    )
                   )}
                 </div>
               </div>

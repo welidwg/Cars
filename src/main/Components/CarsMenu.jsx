@@ -124,16 +124,6 @@ export default function CarsMenu(props) {
                   </span>
                 )}
               </div>
-              <div className="pagination__option">
-                <a href="#" className="active">
-                  1
-                </a>
-                <a href="#">2</a>
-                <a href="#">3</a>
-                <a href="#">
-                  <span className="arrow_carrot-2right"></span>
-                </a>
-              </div>
             </div>
           </div>
         </div>

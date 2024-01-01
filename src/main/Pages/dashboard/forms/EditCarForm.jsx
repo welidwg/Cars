@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 export default function EditCarForm(props) {
   const user = AUTH_TOKEN && AUTH_USER;
   const [formDt, setFormData] = useState(null);
-  const [suggestions, setSuggestions] = useState([]);
   const handleChange = (e) => {
     const { name, value, type } = e.target;
     setFormData((prevData) => ({
@@ -27,8 +26,6 @@ export default function EditCarForm(props) {
         boite: props.car.boite,
         year: props.car.year,
         photos: props.car.photos,
-        newPhotos: [],
-        removePhotos: [],
       });
     }
   }, [props.car]);
@@ -40,19 +37,14 @@ export default function EditCarForm(props) {
       for (const key in formDt) {
         if (formDt.hasOwnProperty(key)) {
           const value = formDt[key];
-          if (key === "newPhotos" && value instanceof FileList) {
-            for (let i = 0; i < value.length; i++) {
-              formData.append(key, value[i]);
-            }
-          } else {
-            formData.append(key, value);
-          }
+          formData.append(key, value);
         }
       }
+      console.log(...formData);
       await axios
         .put(URL + "/cars/" + formDt.id, formData, {
           headers: {
-            "Content-Type": "multipart/form-data",
+            "Content-Type": "application/json",
           },
         })
         .then((res) => {

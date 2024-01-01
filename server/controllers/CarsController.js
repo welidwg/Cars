@@ -93,6 +93,7 @@ export const updateCarById = async (req, res) => {
     const car = await Car.findByPk(carId);
     if (car) {
       await car.update(req.body);
+      console.log(req.body);
       return res.status(201).json({ success: "Voiture bien modifiée" });
     } else {
       return res.status(404).json({ error: "Voiture non trouvée" });

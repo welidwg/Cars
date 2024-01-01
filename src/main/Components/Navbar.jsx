@@ -89,9 +89,9 @@ export default function Navbar(props) {
                   <li className="">
                     <NavLink to={"/"}>Accueil</NavLink>
                   </li>
-                  <li>
+                  {/* <li>
                     <a href="./car.html">Voitures</a>
-                  </li>
+                  </li> */}
                   {user && (
                     <li>
                       <NavLink to={"/dash/cars"}>Mon espace</NavLink>
