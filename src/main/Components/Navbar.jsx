@@ -37,11 +37,7 @@ export default function Navbar(props) {
             <div className="col-lg-7">
               <ul className="header__top__widget">
                 <li>
-                  <i className="far fa-clock"></i> Week day: 08:00 am to 18:00
-                  pm
-                </li>
-                <li>
-                  <i className="far fa-envelope"></i> Info.colorlib@gmail.com
+                  <i className="far fa-envelope"></i> Autobot@gmail.com
                 </li>
               </ul>
             </div>

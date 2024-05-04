@@ -108,7 +108,7 @@ export default function LoginPage(props) {
                           </div>
                         </div> */}
                         <button
-                          className=" primary-btn  d-block btn-user w-100 text-center"
+                          className=" primary-btn btn  d-block btn-user w-100 text-center"
                           type="submit"
                         >
                           Connexion

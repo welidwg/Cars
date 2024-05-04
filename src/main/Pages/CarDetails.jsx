@@ -139,7 +139,7 @@ export default function CarDetails(props) {
                   </ul>
                   {user && user.id !== car.owner.id ? (
                     <>
-                      <a href="#" className="primary-btn">
+                      <a href={`tel:${car.owner.tel}`} className="primary-btn">
                         <i className="fas fa-phone"></i> Contactez le
                         propriétaire
                       </a>
